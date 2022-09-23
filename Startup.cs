@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -30,7 +31,7 @@ namespace MedicalRepresentativeScheduleMicroservice
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddDbContext<CSPharmacyMedicineSupplyManagement.Models.PharmacyMedicineSupplyManagementContext>();
+            services.AddDbContext<CSPharmacyMedicineSupplyManagement.Models.PharmacyMedicineSupplyManagementContext>(c => c.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
   .AddJwtBearer(options =>
